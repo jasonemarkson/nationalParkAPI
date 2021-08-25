@@ -12,15 +12,7 @@ class ParksController < ApplicationController
     end
 
     def create
-        park = Park.create(
-            fullName: params[:fullName],
-            parkCode: params[:parkCode],
-            description: params[:description],
-            latitude: params[:latitude],
-            longitude: params[:longitude],
-            images: params[:images],
-            activities: params[:activities]
-        )
+        park = Park.create(park_params)
 
         render json: park
     end
@@ -31,5 +23,11 @@ class ParksController < ApplicationController
         park.destroy
 
         render json: parks
+    end
+
+    private
+
+    def park_params
+        params.require(:park).permit(fullName: params[:fullName], parkCode: params[:parkCode], description: params[:description], latitude: params[:latitude], longitude: params[:longitude], images: params[:images], activities: params[:activities])
     end
 end
