@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_25_013020) do
+ActiveRecord::Schema.define(version: 2021_08_25_205125) do
+
+  create_table "images", force: :cascade do |t|
+    t.string "credit"
+    t.string "title"
+    t.string "altText"
+    t.string "caption"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "park_id"
+  end
 
   create_table "parks", force: :cascade do |t|
     t.string "fullName"
@@ -18,8 +29,7 @@ ActiveRecord::Schema.define(version: 2021_08_25_013020) do
     t.string "description"
     t.float "latitude"
     t.float "longitude"
-    t.string "images"
-    t.string "activities"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

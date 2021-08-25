@@ -1,14 +1,14 @@
 class ParksController < ApplicationController
     def index
-        parks = Park.all 
+        parks = Park.all
 
-        render json: parks
+        render json: parks, except: [:created_at, :updated_at], include: :images
     end
 
     def show
         park = Park.find_by_id(params[:id])
 
-        render json: park
+        render json: park, except: [:created_at, :updated_at], include: :images
     end
 
     def create
@@ -28,6 +28,6 @@ class ParksController < ApplicationController
     private
 
     def park_params
-        params.require(:park).permit(fullName: params[:fullName], parkCode: params[:parkCode], description: params[:description], latitude: params[:latitude], longitude: params[:longitude], images: params[:images], activities: params[:activities])
+        params.require(:park).permit(:fullName, :parkCode, :description, :latitude, :longitude, :url, :park_images)
     end
 end
