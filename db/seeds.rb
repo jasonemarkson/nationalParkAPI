@@ -35,6 +35,7 @@ resp["data"].each do |park|
         latitude: park["latitude"],
         longitude: park["longitude"],
         url: park["url"],
+        states: park["states"],
         park_images: park["images"]
     }
 )
