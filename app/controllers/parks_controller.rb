@@ -1,6 +1,11 @@
 class ParksController < ApplicationController
     def index
-        parks = Park.all
+        if params[:user_id]
+            user = User.find_by_id(params[:user_id])
+            parks = user.parks
+        else
+            parks = Park.all
+        end
 
         render json: parks, except: [:created_at, :updated_at], include: :images
     end
