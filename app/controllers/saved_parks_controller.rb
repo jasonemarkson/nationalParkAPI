@@ -1,5 +1,6 @@
 class SavedParksController < ApplicationController
   before_action :set_saved_park, only: [:show, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /saved_parks
   def index
@@ -16,7 +17,7 @@ class SavedParksController < ApplicationController
   # POST /saved_parks
   def create
     saved_park = SavedPark.new(saved_park_params)
-
+    
     if saved_park.save
       render json: saved_park, status: :created, location: saved_park
     else
