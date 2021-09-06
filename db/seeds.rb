@@ -28,4 +28,4 @@ end
 
 user = User.create(email: "jasonmarkson@gmail.com", username: "jason", password_digest: "test")
 
-savedPark = SavedPark.create(park_id: 1, user_id: 1)
+savedPark = SavedPark.create(park_id: 1, user_id: 1, attractions: "Walking the stairs", notes: "I want to come back here with my entire family next summer!")
