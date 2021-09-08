@@ -6,12 +6,14 @@ class SavedParksController < ApplicationController
   def index
     saved_parks = SavedPark.all
 
-    render json: saved_parks
+    render json: saved_parks, include: {park: {include: :images}}
   end
 
   # GET /saved_parks/1
   def show
-    render json: saved_park
+    saved_park = SavedPark.find_by_id(params[:id])
+
+    render json: saved_park, include: {park: {include: :images}}
   end
 
   # POST /saved_parks
@@ -19,7 +21,7 @@ class SavedParksController < ApplicationController
     saved_park = SavedPark.new(saved_park_params)
     
     if saved_park.save
-      render json: saved_park, status: :created, location: saved_park
+      render json: saved_park, except: [:created_at, :updated_at], include: {park: {include: :images}}, status: :created, location: saved_park
     else
       render json: saved_park.errors, status: :unprocessable_entity
     end
