@@ -1,6 +1,4 @@
 class SavedParksController < ApplicationController
-  before_action :set_saved_park, only: [:show, :update, :destroy]
-  # skip_before_action :verify_authenticity_token
 
   # GET /saved_parks
   def index
@@ -29,6 +27,8 @@ class SavedParksController < ApplicationController
 
   # PATCH/PUT /saved_parks/1
   def update
+    saved_park = SavedPark.find_by_id(params[:id])
+    
     if saved_park.update(saved_park_params)
       render json: saved_park
     else
@@ -49,6 +49,6 @@ class SavedParksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def saved_park_params
-      params.fetch(:saved_park).permit(:park_id, :user_id)
+      params.fetch(:saved_park).permit(:park_id, :user_id, :attractions)
     end
 end
