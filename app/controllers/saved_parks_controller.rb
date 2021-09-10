@@ -28,8 +28,10 @@ class SavedParksController < ApplicationController
   # PATCH/PUT /saved_parks/1
   def update
     saved_park = SavedPark.find_by_id(params[:id])
+    attraction = Attraction.create(name: saved_park_params[:attractions])
+    saved_park.attractions.push(attraction)
     
-    if saved_park.update(saved_park_params)
+    if saved_park.save
       render json: saved_park
     else
       render json: saved_park.errors, status: :unprocessable_entity
@@ -38,6 +40,7 @@ class SavedParksController < ApplicationController
 
   # DELETE /saved_parks/1
   def destroy
+    saved_park = SavedPark.find(params[:id])
     saved_park.destroy
   end
 
